@@ -20,7 +20,7 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'DockerHubk8s1', variable: 'dockerhubpswd1')]){
+                    withCredentials([string(credentialsId: 'DockerHub123', variable: 'dockerhubpswd1')]){
                     sh "docker login -u nitin4646 -p ${dockerhubpswd1}"
                     }
                     sh 'docker push nitin4646/git-docker-k8spipeline231223i'
