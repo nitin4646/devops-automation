@@ -1,37 +1,36 @@
 pipeline {
     agent any
     tools{
-        maven 'maven_3_5_0'
+        maven 'Maven2802'
     }
-    stages{
+      stages{
         stage('Build Maven'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Java-Techie-jt/devops-automation']]])
-                sh 'mvn clean install'
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nitin4646/devops-automation']]])
+                bat "mvn clean install"
             }
         }
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t javatechie/devops-integration .'
+                    bat 'docker build -t nitin4646/git-docker-k8spipeline231223i .'
                 }
             }
         }
         stage('Push image to Hub'){
             steps{
                 script{
-                   withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u javatechie -p ${dockerhubpwd}'
-
-}
-                   sh 'docker push javatechie/devops-integration'
+                    withCredentials([string(credentialsId: 'DockerHubk8s1', variable: 'dockerhubpswd1')]){
+                    bat "docker login -u nitin4646 -p ${dockerhubpswd1}"
+                    }
+                    bat 'docker push nitin4646/git-docker-k8spipeline231223i'
                 }
             }
         }
         stage('Deploy to k8s'){
             steps{
                 script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
+                    kubernetesDeploy (configs: 'deploymentservice.yaml', kubeconfigId: "awsk8snew2")
                 }
             }
         }
