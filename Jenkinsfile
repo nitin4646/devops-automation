@@ -28,7 +28,11 @@ pipeline {
             }
         }
         stage('Deploy to k8s'){
-            sh 'kubectl apply -f deploymentservice.yaml'
+            steps{
+                script{
+                    sh 'kubectl apply -f deploymentservice.yaml'
+                }
+            }
         }
     }
 }
