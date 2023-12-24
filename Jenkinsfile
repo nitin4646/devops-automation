@@ -13,7 +13,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t nitin4646/git-docker-k8spipeline231223i .'
+                    sh 'docker build -t nitin4646/git-docker-k8spipeline241223i .'
                 }
             }
         }
