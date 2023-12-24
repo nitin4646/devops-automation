@@ -30,10 +30,11 @@ pipeline {
         stage('Deploy to k8s'){
             steps{
                 script{
-                    withKubeConfig([credentialsId:'k8sfile', serverUrl:''])
+                    withKubeConfig([credentialsId:'k8sfile', serverUrl:'']){
                     sh ('kubectl apply -f deploymentservice.yaml')
     // some block
-}
+                    }
+                }
             }
         }
     }
