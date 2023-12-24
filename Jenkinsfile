@@ -23,7 +23,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'DockerHub123', variable: 'dockerhubpswd1')]){
                     sh "docker login -u nitin4646 -p ${dockerhubpswd1}"
                     }
-                    sh 'docker push nitin4646/git-docker-k8spipeline231223i'
+                    sh 'docker push nitin4646/git-docker-k8spipeline241223i'
                 }
             }
         }
