@@ -30,9 +30,10 @@ pipeline {
         stage('Deploy to k8s'){
             steps{
                 script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml', kubeconfigId: "awsk8snew2")
+                    withKubeConfig([credentialsId:'k8sfile', serverUrl:'']){
+                    sh ('kubectl apply -f deploymentservice.yaml')
     // some block
-                    
+                    }
                 }
             }
         }
